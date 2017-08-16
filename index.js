@@ -41,10 +41,17 @@ app.engine('handlebars', hbs({
 
 app.set('view engine', 'handlebars')
 
-app.get('/', function(req, res) {
+app.use(express.static('public'))
+
+app.get('/', function (req, res) {
     res.render('home')
 })
 
-app.listen(2001, function(){
+app.get('/', function (req, res) {
+    res.render("/test")
+})
+
+
+app.listen(2001, function () {
     console.log('listening')
 })
