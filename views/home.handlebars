@@ -1,11 +1,20 @@
 <h1>Farmer's Market Finder</h1>
 
 <div class="zipSubmit">
-    <form action="/" method="post">
+    <form action="/submit" method="post">
         <input type="text" id="text" name="fname" required>
         <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th scope="row">{{zipcode}}</th>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
 
 <script type="text/javascript">
     let button = document.querySelector("#text")
