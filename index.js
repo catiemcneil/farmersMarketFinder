@@ -1,7 +1,7 @@
 const express = require('express')
 const hbs = require('express-handlebars')
 const app = express()
-const bp = require('body-parser')
+const bodyParser = require('body-parser')
 
 // function getResults(zip) {
 //     // or
@@ -41,6 +41,8 @@ app.engine('handlebars', hbs({
 app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
+
+app.use(bodyParser.json())
 
 app.get('/', function (req, res) {
     res.render('home')
