@@ -42,7 +42,10 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('public'))
 
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 app.get('/', function (req, res) {
     res.render('home')
@@ -50,7 +53,9 @@ app.get('/', function (req, res) {
 
 app.post('/submit', (req, res) => {
     let zipcode = req.body.fname
-    res.render('home',{zipcode})
+    res.render('home', {
+        zipcode
+    })
 })
 
 
