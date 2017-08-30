@@ -51,7 +51,7 @@ app.get('/', function (req, res) {
     res.render('home')
 })
 
-app.post('/submit', (req, res) => {
+app.post('/', (req, res) => {
     let zipcode = req.body.fname
     res.render('home', {
         zipcode
