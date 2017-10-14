@@ -2,37 +2,50 @@ const express = require('express')
 const hbs = require('express-handlebars')
 const app = express()
 const bodyParser = require('body-parser')
+//we use request in order to use ajax with express
+const request = require('request')
 
-// function getResults(zip) {
-//     // or
-//     // function getResults(lat, lng) {
-//     $.ajax({
-//         type: "GET",
-//         contentType: "application/json; charset=utf-8",
-//         // submit a get request to the restful service zipSearch or locSearch.
-//         url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + zip,
-//         // or
-//         // url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + lat + "&lng=" + lng,
-//         dataType: 'jsonp',
-//         jsonpCallback: 'searchResultsHandler'
-//     });
-// }
-// //iterate through the JSON result object.
-// function searchResultsHandler(searchResults) {
-//     for (var key in searchresults) {
-//         alert(key);
-//         var results = searchresults[key];
-//         for (var i = 0; i < results.length; i++) {
-//             var result = results[i];
-//             for (var key in result) {
-//                 //only do an alert on the first search result
-//                 if (i == 0) {
-//                     alert(result[key]);
-//                 }
-//             }
-//         }
-//     }
-// }
+//we are getting request with our api (https://www.npmjs.com/package/request)
+function getResults(zip) {
+    let data = request.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, function (err, response, body) {
+        let data = JSON.parse(body)
+        console.log(data)
+        return data
+    })
+    return data
+}
+
+
+//function getResults(zip) {
+//    // or
+//    // function getResults(lat, lng) {
+//    $.ajax({
+//        type: "GET",
+//        contentType: "application/json; charset=utf-8",
+//        // submit a get request to the restful service zipSearch or locSearch.
+//        url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=" + zip,
+//        // or
+//        // url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=" + lat + "&lng=" + lng,
+//        dataType: 'jsonp',
+//        jsonpCallback: 'searchResultsHandler'
+//    });
+//}
+//iterate through the JSON result object.
+//function searchResultsHandler(searchResults) {
+//    for (var key in searchresults) {
+//        alert(key);
+//        var results = searchresults[key];
+//        for (var i = 0; i < results.length; i++) {
+//            var result = results[i];
+//            for (var key in result) {
+//                //only do an alert on the first search result
+//                if (i == 0) {
+//                    alert(result[key]);
+//                }
+//            }
+//        }
+//    }
+//}
 app.engine('handlebars', hbs({
     defaultLayout: 'main'
 }))
@@ -54,10 +67,10 @@ app.get('/', function (req, res) {
 app.post('/submit', (req, res) => {
     let zipcode = req.body.fname
     res.render('home', {
-        zipcode
+        zipcode: JSON.stringify(getResults(zipcode))
     })
 })
-
+//'/submit' relates to the form action
 
 app.listen(2001, function () {
     console.log('listening')
