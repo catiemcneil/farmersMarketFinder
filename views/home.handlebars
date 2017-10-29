@@ -1,7 +1,9 @@
 <h1>Farmer's Market Finder</h1>
 
 <div class="zipSubmit">
+    <!--//The action attribute is used to inform the browser what page (or script) to call once the "submit" button is pressed.-->
     <form action="/submit" method="post">
+        <!--The name attribute is used to reference elements in a JavaScript, or to reference form data after a form is submitted. Note: Only form elements with a name attribute will have their values passed when submitting a form.-->
         <input type="text" id="text" name="fname" required>
         <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     </form>

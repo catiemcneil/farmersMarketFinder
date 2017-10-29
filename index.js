@@ -6,12 +6,19 @@ const bodyParser = require('body-parser')
 const request = require('request')
 
 //we are getting request with our api (https://www.npmjs.com/package/request)
+//creating a function called getResults, which will take a zipcode
 function getResults(zip) {
-    let data = request.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, function (err, response, body) {
-        let data = JSON.parse(body)
-        console.log(data)
-        return data
-    })
+    //creating a variable called data to eventually get all the farmers market data from the api
+    let data =
+        //the zipcode referenced above takes the zip entered and plugs it into the request.get
+        request.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zip, function (err, response, body) {
+            //the data resulting from the request.get will now get parsed to look readable
+            let data = JSON.parse(body)
+            console.log(data)
+            //output results from the request.get
+            return data
+        })
+    //output results from the getResults function
     return data
 }
 
@@ -64,13 +71,15 @@ app.get('/', function (req, res) {
     res.render('home')
 })
 
+//'/submit' relates to the form action in home.handlebars and the results post to the submit page
 app.post('/submit', (req, res) => {
+    //creating a variable to pull from the name='fname' in home.handlebars
     let zipcode = req.body.fname
+    //we are rendering the home.handlebars page 
     res.render('home', {
-        zipcode: JSON.stringify(getResults(zipcode))
+        zipcode: getResults(zipcode)
     })
 })
-//'/submit' relates to the form action
 
 app.listen(2001, function () {
     console.log('listening')
