@@ -77,14 +77,13 @@ app.post('/submit', (req, res) => {
     request.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=' + zipcode, function (err, response, body) {
         //the data resulting from the request.get will now get parsed to look readable
         let data = JSON.parse(body)
-        console.log(data.results[0])
+        console.log(data)
         //output results from the request.get
         res.render('home', {
-            zipcode: data.results[0].marketname
+            zipcode: data.results
         })
     })
     //we are rendering the home.handlebars page
-
 })
 
 app.listen(2001, function () {
