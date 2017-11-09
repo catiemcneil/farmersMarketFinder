@@ -10,7 +10,11 @@
 <table class="table">
     <tbody>
         <tr>
-            <th scope="row">{{zipcode}}</th>
+            <th scope="row">
+            {{#each zipcode}}
+                <li>{{marketname}}</li>
+            {{/each}}
+            </th>
             <td></td>
         </tr>
     </tbody>
