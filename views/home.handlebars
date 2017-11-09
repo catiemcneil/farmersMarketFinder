@@ -12,7 +12,7 @@
         <tr>
             <th scope="row">
             {{#each zipcode}}
-                <li>{{marketname}}</li>
+                <li><a href="/{{id}}">{{marketname}}</a></li>
             {{/each}}
             </th>
             <td></td>
@@ -20,6 +20,15 @@
     </tbody>
 </table>
 
+<table class="id-table">
+    <tbody>
+        <tr>
+            <th scope="row">
+                <li>{{marketdetails.Address}}</li>
+            </th>
+        </tr>
+    </tbody>
+</table>
 <script type="text/javascript">
     let button = document.querySelector("#text")
     let resultSubmit = document.querySelector('#submit')

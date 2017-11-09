@@ -5,3 +5,7 @@ h1 {
 .zipSubmit {
     text-align: center;
 }
+
+li {
+    list-style-type: none;
+}

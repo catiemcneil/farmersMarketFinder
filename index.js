@@ -85,6 +85,20 @@ app.post('/submit', (req, res) => {
     })
     //we are rendering the home.handlebars page
 })
+// app.get must be used with <a href>, app.post with forms (among others)
+app.get('/:id', (req, res) => {
+    id = req.params.id
+    console.log(id)
+    request.get('http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=' + id, function (err, response, body) {
+    //the data resulting from the request.get will now get parsed to look readable
+        let data = JSON.parse(body)
+        console.log(data)
+        //output results from the request.get
+        res.render('home', {
+            marketdetails: data.marketdetails
+        })
+    })
+})
 
 app.listen(2001, function () {
     console.log('listening')
