@@ -70,7 +70,7 @@ app.get('/', function (req, res) {
 })
 
 //'/submit' relates to the form action in home.handlebars and the results post to the submit page
-app.post('/submit', (req, res) => {
+app.post('/', (req, res) => {
     //creating a variable to pull from the name='fname' in home.handlebars
     let zipcode = req.body.fname
     //Because javascript is asynchronous, put the request inside the post
