@@ -70,7 +70,7 @@ app.get('/', function (req, res) {
 })
 
 //'/submit' relates to the form action in home.handlebars and the results post to the submit page
-app.post('/submit', (req, res) => {
+app.post('/', (req, res) => {
     //creating a variable to pull from the name='fname' in home.handlebars
     let zipcode = req.body.fname
     //Because javascript is asynchronous, put the request inside the post
@@ -93,7 +93,22 @@ app.get('/:id', (req, res) => {
     //the data resulting from the request.get will now get parsed to look readable
         let data = JSON.parse(body)
         console.log(data)
+        // Pulling marketdetails from the resulting data from the request.get from the USDA API
+        let marketdetails = data.marketdetails
+        // Pull the google maps url from the marketdetails
+        let url = marketdetails.GoogleLink
+        // This splits a string at the = sign in the USDA API (based on a character) into an array. [1] is the second object in the array
+        let coordinates = url.split('=')[1]
+        // This splits the coorindates (^^^) at the characters %2C%20 and takes the first object in the array ([0])
+        let long = coordinates.split('%2C%20')[0]
+        // This splits the coordinates at the characters %20 and takes the second object in the array
+        // Since there are two %20 in the url, it gets the stuff between them
+        let lat = coordinates.split('%20')[1]
+        console.log(long + " : " + lat)
         //output results from the request.get
+
+        //initMap(lat,long);
+
         res.render('home', {
             marketdetails: data.marketdetails
         })
