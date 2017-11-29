@@ -100,17 +100,17 @@ app.get('/:id', (req, res) => {
         // This splits a string at the = sign in the USDA API (based on a character) into an array. [1] is the second object in the array
         let coordinates = url.split('=')[1]
         // This splits the coorindates (^^^) at the characters %2C%20 and takes the first object in the array ([0])
-        let long = coordinates.split('%2C%20')[0]
+        let lat = coordinates.split('%2C%20')[0]
         // This splits the coordinates at the characters %20 and takes the second object in the array
         // Since there are two %20 in the url, it gets the stuff between them
-        let lat = coordinates.split('%20')[1]
+        let long = coordinates.split('%20')[1]
         console.log(long + " : " + lat)
         //output results from the request.get
 
-        //initMap(lat,long);
-
         res.render('home', {
-            marketdetails: data.marketdetails
+            marketdetails: data.marketdetails,
+            lat: lat,
+            long: long
         })
     })
 })
