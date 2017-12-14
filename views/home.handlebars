@@ -12,7 +12,7 @@
         <tr>
             <th scope="row">
                 {{#each zipcode}}
-                <li><a href="/{{id}}">{{marketname}}</a></li>
+                <li><a href="/{{id}}" id="{{id}}" class="marketId">{{marketname}}</a></li>
                 {{/each}}
             </th>
             <td></td>
@@ -29,9 +29,6 @@
         </tr>
     </tbody>
 </table>
-
-<p hidden id="hiddenlat"> {{lat}} </p>
-<p hidden id="hiddenlong"> {{long}} </p>
 
 <div id="map"></div>
 
